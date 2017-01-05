@@ -3,7 +3,20 @@
   "description": "Facebook authentication module for your Reazy application.",
   "version": "0.0.1",
   "main": "dist/index.js",
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GeekyAnts/reazy-native-auth-facebook.git"
+  },
+  "keywords": [
+    "reazy",
+    "reazy-native-auth-facebook",
+    "react",
+    "react",
+    "native",
+    "framework"
+  ],
+  "author": "Kumar Sanket, Himanshu Satija, Sankhadeep Roy",
+  "license": "Apache-2.0",
   "engines": {
     "node": ">= 4"
   },
