@@ -21,8 +21,11 @@
     "node": ">= 4"
   },
   "scripts": {
-    "build": "babel src --presets babel-preset-es2015 --out-dir dist",
-    "start": "babel src --presets babel-preset-es2015 --watch --out-dir dist"
+    "copy-templates": "cp -r src/generators/add/templates dist/generators/add/templates",
+    "postadd": "dist/postadd.js",
+    "babel-compile": "babel src --presets babel-preset-es2015 --out-dir dist --copy-files --ignore /templates/",
+    "build": "rm -rf dist && npm run babel-compile && npm run copy-templates",
+    "watch": "babel src --presets babel-preset-es2015 --watch --out-dir dist -s --copy-files --ignore /templates/  && npm run copy-templates"
   },
   "devDependencies": {
     "babel-cli": "^6.1.4",
@@ -31,6 +34,20 @@
     "babel-preset-es2015": "^6.1.4"
   },
   "dependencies": {
-    "react-native-fbsdk": "^0.4.0"
+    "ast-traverse": "^0.1.1",
+    "chalk": "^1.1.1",
+    "cross-spawn-async": "^2.1.9",
+    "fs-extra": "^2.0.0",
+    "i": "^0.3.3",
+    "object.assign": "^4.0.3",
+    "react-native-fbsdk": "^0.4.0",
+    "recast": "^0.11.2",
+    "repeating": "^2.0.0",
+    "string": "^3.3.1",
+    "string-length": "^1.0.1",
+    "update-notifier": "^1.0.1",
+    "xcode": "https://github.com/GeekyAnts/node-xcode",
+    "yeoman-environment": "^1.5.2",
+    "yeoman-generator": "^0.24.1"
   }
 }
