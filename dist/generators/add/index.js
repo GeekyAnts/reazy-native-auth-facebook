@@ -7,6 +7,36 @@ var assign = require('object.assign').getPolyfill();
 var transform = require('../../lib/transform');
 var xcode = require('xcode');
 var os = require('os');
+var https = require('https');
+var extractZip = require('extract-zip');
+
+function downloadFile(hostname, downloadPath, filename, cb) {
+
+  var options = {
+    hostname: hostname,
+    port: 443,
+    path: downloadPath,
+    method: 'GET',
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36'
+    }
+  };
+
+  var file = fs.createWriteStream(filename);
+
+  var req = https.request(options, function (res) {
+    res.on('data', function (d) {
+      file.write(d);
+    });
+    res.on('end', function () {
+      cb();
+    });
+    res.on('error', function (error) {
+      cb(error);
+    });
+  });
+  req.end();
+}
 
 function randomString(length) {
   var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -262,11 +292,28 @@ module.exports = generators.Base.extend({
     }];
 
     this.prompt(prompts).then(function (props) {
-      console.log('here oawbduoebfiob ');
       this.props = assign(this.props, props);
-      console.log('here poahiwduv... ');
       done();
     }.bind(this));
+  },
+
+  downloading: function downloading() {
+    var done = this.async();
+    this.log('\nDownloading FacebookSDK for iOS. This might take a while.');
+
+    var self = this;
+    downloadFile('origincache.facebook.com', '/developers/resources/?id=FacebookSDKs-iOS-4.18.0.zip', this.templatePath('fbsdk-ios-4.18.0.zip'), function (error) {
+      if (error) {
+        console.log('Error: ' + error);
+      } else {
+        console.log('Download complete.\n');
+        console.log('Unzipping...');
+        extractZip(self.templatePath('fbsdk-ios-4.18.0.zip'), { dir: self.templatePath('fbsdk-ios-4.18.0') }, function (err) {
+          console.log('Unzipping complete\n');
+          done();
+        });
+      }
+    });
   },
 
   writing: function writing() {
@@ -281,7 +328,7 @@ module.exports = generators.Base.extend({
     this.npmInstall(['react-native-fbsdk'], { save: true });
     this.spawnCommandSync('react-native', ['link', 'react-native-fbsdk']);
 
-    fs.copySync(this.templatePath('FacebookSDKs-iOS-4.18.0'), path.join(os.homedir(), 'Documents/FacebookSDK'));
+    fs.copySync(this.templatePath('fbsdk-ios-4.18.0'), path.join(os.homedir(), 'Documents/FacebookSDK'));
     editPBXProj(iosProjPath, this.props.name);
     editInfoPlist(infoPlistPath);
     editAppDelegate(appDelegatePath);
@@ -295,3 +342,4 @@ module.exports = generators.Base.extend({
     addToEnv(envPath, 'FACEBOOK_APP_NAME=' + this.props.fbAppName);
   }
 });
+//# sourceMappingURL=index.js.map

@@ -88,3 +88,4 @@ module.exports = generators.Base.extend({
     deleteEnvFile(envExamplePath);
   }
 });
+//# sourceMappingURL=index.js.map
