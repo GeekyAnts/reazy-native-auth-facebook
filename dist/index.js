@@ -89,4 +89,3 @@ var _reactNativeFbsdk = require('react-native-fbsdk');
 var _reactNativeFbsdk2 = _interopRequireDefault(_reactNativeFbsdk);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-//# sourceMappingURL=index.js.map

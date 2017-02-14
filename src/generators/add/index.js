@@ -7,6 +7,7 @@ var xcode = require('xcode');
 var os = require('os');
 var https = require('https');
 var extractZip = require('extract-zip');
+var Shell = require('shelljs');
 
 function downloadFile(hostname, downloadPath, filename, cb) {
 
@@ -34,13 +35,6 @@ function downloadFile(hostname, downloadPath, filename, cb) {
     })
   });
   req.end();
-}
-
-function randomString(length) {
-  var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  var result = '';
-  for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
-  return result;
 }
 
 function useService(filename, statement) {
@@ -314,6 +308,15 @@ module.exports = generators.Base.extend({
       process.exit(1);
     }
 
+    // Check Xcode version. Exit if not 8.x.x
+    const xcodePath = Shell.exec('xcode-select -p', { silent: true }).stdout.split(/[\n\r\s]+/g)[0];
+    const xcodeVer = Shell.exec(xcodePath + '/usr/bin/xcodebuild -version', { silent: true }).stdout.split(/[\n\r\s]+/g)[1];
+    if(xcodeVer.split('.')[0] != 8) {
+      this.log('This plugin supports Xcode v8.x.x. Your installed Xcode version is ' + xcodeVer);
+      this.log('Please upgrade your Xcode and try again');
+      process.exit(1);
+    }
+
     this.props = {
       name: this.pkg.name || process.cwd().split(path.sep).pop()
     };
@@ -376,7 +379,7 @@ module.exports = generators.Base.extend({
     const androidBuildGradlePath = this.destinationPath('android/app/build.gradle');
 
     this.log('Installing react-native-fbsdk as a project dependency...');
-    this.npmInstall(['react-native-fbsdk'], {save: true});
+    this.npmInstall(['react-native-fbsdk@0.5.0'], {save: true});
     this.spawnCommandSync('react-native', ['link', 'react-native-fbsdk']);
 
     fs.copySync(this.templatePath('fbsdk-ios-4.18.0'), path.join(os.homedir(), 'Documents/FacebookSDK'));
