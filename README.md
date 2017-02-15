@@ -1,11 +1,11 @@
 # reazy-native-auth-facebook
-### Facebook authentication plugin for Reazy apps (Only for iOS)
+### Facebook authentication plugin for Reazy apps
 
 ---
 
 ## Installation
 
-### 1. Using [Reazy CLI](https://www.npmjs.com/package/reazy-cli)
+### 1. Using [Reazy CLI](https://www.npmjs.com/package/reazy-cli)(only for iOS)
 
   ```sh
   $ reazy add auth                    // dependency
