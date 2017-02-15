@@ -5,7 +5,7 @@
 
 ## Installation
 
-### 1. Using [Reazy CLI](https://www.npmjs.com/package/reazy-cli)(only for iOS)
+### 1. Using [Reazy CLI](https://www.npmjs.com/package/reazy-cli) (only for iOS)
 
   ```sh
   $ reazy add auth                    // dependency
@@ -88,6 +88,7 @@ This service provides the following:
 This function logs out the user and calls `auth.setToken(null)` and  `auth.setUser(null)`.
 
 - **Example:**
+
   ```js
   app.authFacebook.logout();
   ```
@@ -96,6 +97,7 @@ This function logs out the user and calls `auth.setToken(null)` and  `auth.setUs
 
 If you want to do more with FBSDK, this will get you the object imported from [react-native-fbsdk](https://github.com/facebook/react-native-fbsdk).
 - **Example:**
+
   ```js
   const FBSDK = app.authFacebook.FBSDK;
   const {
