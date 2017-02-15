@@ -5,7 +5,7 @@
 
 ## Installation
 
-### 1. Using [Reazy CLI](https://www.npmjs.com/package/reazy-cli) (only for iOS)
+### 1. Using [Reazy CLI](https://www.npmjs.com/package/reazy-cli) (only for iOS, Android coming soon)
 
   ```sh
   $ reazy add auth                    // dependency
