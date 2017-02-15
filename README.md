@@ -1,5 +1,5 @@
 # reazy-native-auth-facebook
-### Facebook authentication plugin for Reazy apps
+### Facebook authentication plugin for Reazy apps (Only for iOS)
 
 ---
 
