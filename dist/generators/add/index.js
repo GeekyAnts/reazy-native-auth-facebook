@@ -169,18 +169,16 @@ function addStatementInFunc(fileContentsArr, funcName, statement) {
   if (fileContentsArr[funcLineNumber].indexOf('{') !== -1) {
     fileContentsArr.splice(funcLineNumber + 1, 0, statement);
   } else {
-    (function () {
-      var funcOpenLineNumber = 0;
-      fileContentsArr.filter(function (word, index) {
-        if (word.indexOf('{') !== -1 && index > funcLineNumber && funcOpenLineNumber == 0) {
-          funcOpenLineNumber = index;
-          return true;
-        }
-        return false;
-      });
+    var funcOpenLineNumber = 0;
+    fileContentsArr.filter(function (word, index) {
+      if (word.indexOf('{') !== -1 && index > funcLineNumber && funcOpenLineNumber == 0) {
+        funcOpenLineNumber = index;
+        return true;
+      }
+      return false;
+    });
 
-      fileContentsArr.splice(funcOpenLineNumber + 1, 0, statement);
-    })();
+    fileContentsArr.splice(funcOpenLineNumber + 1, 0, statement);
   }
 
   return fileContentsArr;
@@ -294,6 +292,7 @@ module.exports = generators.Base.extend({
     }];
 
     this.prompt(prompts).then(function (props) {
+      this.log('These config variables will be added to .env file. You can edit that later if you want.');
       this.props = assign(this.props, props);
       done();
     }.bind(this));

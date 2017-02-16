@@ -42,9 +42,8 @@ exports.default = function (param) {
     var login = function login(readPermissions, requestFields) {
       return new Promise(function (resolve, reject) {
         _reactNativeFbsdk.LoginManager.logInWithReadPermissions(readPermissions).then(function (result) {
-          console.log(result);
           if (result.isCancelled) {
-            // console.log('Login cancelled');
+            console.warn('reazy-native-auth-facebook: Login cancelled');
           } else {
             // console.log('Login success with permissions: ', result);
 
@@ -75,7 +74,7 @@ exports.default = function (param) {
     var authFacebookService = {
       login: login,
       logout: logout,
-      Fbsdk: _reactNativeFbsdk2.default
+      FBSDK: _reactNativeFbsdk2.default
     };
 
     app.set(serviceName, authFacebookService);

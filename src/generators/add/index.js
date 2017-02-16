@@ -339,6 +339,7 @@ module.exports = generators.Base.extend({
     ];
 
     this.prompt(prompts).then(function (props) {
+      this.log('These config variables will be added to .env file. You can edit that later if you want.')
       this.props = assign(this.props, props);
       done();
     }.bind(this));
