@@ -1,7 +1,7 @@
 {
   "name": "reazy-native-auth-facebook",
   "description": "Facebook authentication module for your Reazy application.",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "main": "dist/index.js",
   "repository": {
     "type": "git",
