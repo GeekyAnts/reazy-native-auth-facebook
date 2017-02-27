@@ -38,7 +38,7 @@
     "extract-zip": "^1.6.0",
     "fs-extra": "^2.0.0",
     "lodash": "^4.17.4",
-    "reazy-setup-helper": "^0.0.3",
+    "reazy-setup-helper": "^0.0.5",
     "shelljs": "^0.7.6",
     "xcode": "https://github.com/GeekyAnts/node-xcode",
     "yeoman-generator": "^0.24.1"
